@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from pymongo import MongoClient
 from bson import ObjectId
@@ -82,6 +82,11 @@ def serialize(doc):
 
 
 # ---------- Routes ----------
+
+@app.get("/")
+def serve_frontend():
+    return send_from_directory("frontend", "index.html")
+
 
 @app.get("/inventory")
 def get_inventory():
